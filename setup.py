@@ -56,7 +56,7 @@ class cyhpack_build_ext(build_ext):
                 import Cython  # noqa: F401
             except ImportError:
                 raise RuntimeError(
-                    "please install cython to compile cyares from source"
+                    "please install cython to compile cyhpack from source"
                 )
 
             from Cython.Build import cythonize
@@ -109,4 +109,5 @@ if __name__ == "__main__":
             )
         ]
     )
+
 
