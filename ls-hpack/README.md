@@ -5,11 +5,16 @@
 LS-HPACK: LiteSpeed HPACK Library
 =================================
 
+NOTE THAT THIS DOES CONTAIN EDITS NOT SEEN IN THE ACTUAL SOURCE!!! THIS WAS IMPLEMENTED TO IMPROVE PYTHON PERFORMANCE AND SOLVE COMPILING ISSUES!!!
+
 Description
 -----------
 
 LS-HPACK provides functionality to encode and decode HTTP headers using
 HPACK compression mechanism specified in RFC 7541.
+
+
+
 
 Documentation
 -------------
@@ -31,3 +36,4 @@ The library has been tested on the following platforms:
 - Windows
 
 Copyright (c) 2018 - 2020 LiteSpeed Technologies Inc
+
