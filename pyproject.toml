@@ -1,0 +1,22 @@
+[project]
+name = "cyhpack"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Vizonex", email = "VizonexBusiness@gmail.com" }
+]
+requires-python = ">=3.10"
+dependencies = []
+
+[build-system]
+requires = ["setuptools", "cython", "wheel"]
+
+# [dependency-groups]
+# dev = [
+#     "pytest-codspeed>=4.0.0",
+# ]
+
+[tool.setuptools]
+zip-safe = false
+packages = ['cyhpack']
