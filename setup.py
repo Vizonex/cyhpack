@@ -4,7 +4,6 @@ import os
 
 
 class cyhpack_build_ext(build_ext):
-
     # Brought over from winloop since these can be very useful.
     user_options = build_ext.user_options + [
         ("cython-always", None, "run cythonize() even if .c files are present"),
@@ -21,7 +20,6 @@ class cyhpack_build_ext(build_ext):
         self.add_include_dir(os.path.join("ls-hpack", "compat"))
         self.add_include_dir(os.path.join("ls-hpack", "queue"))
         self.add_include_dir(os.path.join("ls-hpack", ""))
-
 
         # self.add_include_dir(os.path.join("ls-hpack", "windows"))
 
@@ -47,7 +45,6 @@ class cyhpack_build_ext(build_ext):
                         need_cythonize = True
 
         if need_cythonize:
-
             # Double check Cython presence in case setup_requires
             # didn't go into effect (most likely because someone
             # imported Cython before setup_requires injected the
@@ -96,7 +93,7 @@ class cyhpack_build_ext(build_ext):
         self.compiler.set_include_dirs(dirs)
 
 
-# NOTE: ls-hpack/lshpack_lib_init.c belongs to us and it is currently custom to give 
+# NOTE: ls-hpack/lshpack_lib_init.c belongs to us and it is currently custom to give
 # Python allocators full control over the library.
 if __name__ == "__main__":
     setup(
@@ -104,10 +101,13 @@ if __name__ == "__main__":
         ext_modules=[
             Extension(
                 "cyhpack.hpack",
-                ["cyhpack/hpack.pyx", "ls-hpack/lshpack.c", "ls-hpack/lshpack_lib_init.c", "ls-hpack/deps/xxhash/xxhash.c"],
-                extra_compile_args=["-O2"]
+                [
+                    "cyhpack/hpack.pyx",
+                    "ls-hpack/lshpack.c",
+                    "ls-hpack/lshpack_lib_init.c",
+                    "ls-hpack/deps/xxhash/xxhash.c",
+                ],
+                extra_compile_args=["-O2"],
             )
-        ]
+        ],
     )
-
-

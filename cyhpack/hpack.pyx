@@ -1,10 +1,20 @@
-from cpython.bytearray cimport (PyByteArray_AS_STRING,
-                                PyByteArray_FromStringAndSize)
+from cpython.bytearray cimport (
+    PyByteArray_AS_STRING,
+    PyByteArray_FromStringAndSize
+)
 from cpython.bytes cimport PyBytes_FromStringAndSize
 from cpython.exc cimport PyErr_NoMemory, PyErr_SetString
 from cpython.mapping cimport (  # multidict will also work here...
-    PyMapping_Check, PyMapping_Items)
-from cpython.mem cimport PyMem_Free, PyMem_Malloc, PyMem_Realloc, PyMem_RawMalloc, PyMem_RawRealloc, PyMem_RawFree
+    PyMapping_Check, PyMapping_Items
+)
+from cpython.mem cimport (
+    PyMem_Free, 
+    PyMem_Malloc, 
+    PyMem_Realloc,
+    PyMem_RawMalloc, 
+    PyMem_RawRealloc, 
+    PyMem_RawFree
+)
 from cpython.unicode cimport PyUnicode_DecodeUTF8
 from libc.string cimport memcpy
 
@@ -12,7 +22,7 @@ from libc.string cimport memcpy
 from .lshpack cimport *
 from .utils cimport cyhpack_get_buffer, cyhpack_release_buffer
 
-from hpack.exceptions import HPACKDecodingError
+from .exceptions import HPACKDecodingError
 
 
 cdef extern from "Python.h":
@@ -251,28 +261,8 @@ cdef class LSHPackDec:
     ):
         return lshpack_dec_decode(&self.dec, src, src_end, hdr)
 
-
-        # if last_status == LSHPACK_ERR_BAD_DATA:
-        #     # Assume that we did not advance
-        #     if src[0] == src_end:
-        #         return None
-        #     else:
-        #         raise HPACKDecodingError("LSHPACK_ERR_BAD_DATA")
-        
-        # elif last_status == LSHPACK_ERR_MORE_BUF:
-        #     raise HPACKDecodingError("Lshpack received incompleted data")
-        
-        # elif last_status == LSHPACK_ERR_TOO_LARGE:
-        #     raise HPACKDecodingError("Data Receieve was too large")
-        
-        # return out
-
-
-
-
-
     def __dealloc__(self):
-        self.cleanup()
+        lshpack_dec_cleanup(&self.dec)
 
     cdef void set_max_capacity(self, unsigned int max_capacity):
         lshpack_dec_set_max_capacity(&self.dec, max_capacity)

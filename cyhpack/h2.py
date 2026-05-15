@@ -29,5 +29,3 @@ class H2Connection(_H2Connection):
         super().__init__(config)
         self.encoder = Encoder()
         self.decoder = Decoder()
-
-    
